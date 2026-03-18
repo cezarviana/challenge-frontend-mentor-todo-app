@@ -1,7 +1,14 @@
+import TodoHeader from './components/TodoHeader';
+import IconSun from '/images/icon-sun.svg';
+
 function App() {
 
   return (
-      <h1 className="text-light-gray-600 bg-dark-navy-900 ">Hello World</h1>
+    <main className="bg-dark-navy-950 h-lvh">
+      <div className="bg-[url('./images/bg-desktop-dark.jpg')] h-80 bg-cover bg-center">
+          <TodoHeader></TodoHeader>
+      </div>
+    </main>
   )
 }
 
