@@ -3,7 +3,7 @@ import IconSun from '/images/icon-sun.svg';
 const TodoHeader = () => {
 
     return (
-        <header className='flex justify-between max-w-[43.75rem] m-auto mb-6 pt-20'>
+        <header className='flex justify-between mb-6 pt-20'>
             <h1 className='text-light-gray-50 text-[2.5rem] font-bold tracking-[1rem]'>TODO</h1>
 
             <button>
