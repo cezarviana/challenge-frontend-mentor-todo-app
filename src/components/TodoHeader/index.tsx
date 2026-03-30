@@ -1,13 +1,19 @@
-import IconSun from '/images/icon-sun.svg';
+import { themeConfig } from '../../contexts/theme';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import { useContext } from 'react';
 
 const TodoHeader = () => {
 
+    const { theme, toggleTheme } = useContext(ThemeContext);
+
+    console.log(themeConfig[theme]);
+
     return (
-        <header className='flex justify-between mb-6 pt-20'>
+        <header className='flex justify-between p-5'>
             <h1 className='text-light-gray-50 text-[2.5rem] font-bold tracking-[1rem]'>TODO</h1>
 
-            <button>
-                <img className='w-8 h-8' src={IconSun} alt="Alternar tema" />
+            <button className='cursor-pointer' onClick={toggleTheme}>
+                <img className='w-8 h-8' src={`${themeConfig[theme].icon}`} alt="Alternar tema" />
             </button>
         </header>
     )
