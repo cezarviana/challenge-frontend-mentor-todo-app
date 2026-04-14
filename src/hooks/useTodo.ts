@@ -1,16 +1,40 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 
 export interface Todo {
-  id: number;
-  text: string;
-  completed: boolean;
+    id: number;
+    text: string;
+    completed: boolean;
 }
 
+async function getTodos(): Promise<Todo[]> {
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    return [
+
+        {id: 1, text: "Aprender HTML", completed: true},
+        {id: 2, text: "Aprender CSS", completed: true},
+        {id: 3, text: "Aprender useEffect", completed: false},
+    ]
+    
+}
 
 export const useTodo = () => {
 
     const [todoList, setTodoList] = useState<Todo[]>([]);
     const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
+    const [refresh, setRefresh] = useState(false);
+
+    useEffect(() => {
+        const fetchTodos = async () => {
+
+            const todos = await getTodos(); // Simula a chmada pra API externa e depois de 800ms retorna a lista de tarefas;
+
+            console.log("Dados recebidos:", todos);
+            setTodoList(todos);
+        };
+
+        fetchTodos();
+    }, [refresh]);
 
     const addTodo = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -34,7 +58,7 @@ export const useTodo = () => {
 
     const toggleTodoCompleted = (id: number) => {
 
-        
+
         const newTodoList = todoList.map(todo => {
             if (id === todo.id) {
                 const completed = !todo.completed;
@@ -65,11 +89,11 @@ export const useTodo = () => {
 
     const removeTodo = (id: number) => {
         const confirmed = window.confirm("Are you sure you want to delete this todo?");
-        
-        if(confirmed) {
+
+        if (confirmed) {
             setTodoList(prev => prev.filter(todo => todo.id !== id));
         }
-        
+
     }
 
     return {
@@ -79,6 +103,8 @@ export const useTodo = () => {
         filter,
         setFilter,
         clearCompleted,
-        removeTodo
+        removeTodo,
+        refresh,
+        setRefresh
     }
 }

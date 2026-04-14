@@ -4,6 +4,7 @@ import TodoHeader from './components/TodoHeader';
 import TodoList from './components/TodoList';
 import { TodoContainer } from './components/TodoContainer';
 import { useTodo } from './hooks/useTodo';
+import IconReload from "/images/icon-reload.png";
 
 
 function App() {
@@ -15,7 +16,9 @@ function App() {
     filter,
     setFilter,
     clearCompleted,
-    removeTodo
+    removeTodo,
+    refresh,
+    setRefresh
   } = useTodo();
 
   return (
@@ -34,6 +37,11 @@ function App() {
         clearCompleted={clearCompleted}
         removeTodo={removeTodo}
       ></TodoList>
+
+      <button onClick={() => setRefresh(!refresh)}>
+        <img src={ IconReload } alt="ícone de recarga" className='w-6 m-2 cursor-pointer hover:opacity-50 bg-gray-400 rounded-full p-1'/>
+        </button>
+      {/* <p className='text-cyan-50'>Status do refresh: {refresh.toString()}</p> */}
 
     </TodoContainer>
 
